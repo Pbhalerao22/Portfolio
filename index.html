@@ -28,12 +28,14 @@ transition:.3s;
 .nav-link:hover{
 color:#0d6efd !important;
 }
+
 /* HERO */
 .hero{
 background:linear-gradient(135deg,#0f172a,#1e40af);
 color:white;
 padding:120px 0;
 }
+
 @keyframes fadeIn{
 from{opacity:0;transform:translateY(30px);}
 to{opacity:1;transform:translateY(0);}
@@ -147,6 +149,20 @@ animation:float 3s ease-in-out infinite;
 0%,100%{transform:translateY(0);}
 50%{transform:translateY(-10px);}
 }
+.info-icon{
+position:absolute;
+top:15px;
+right:15px;
+font-size:20px;
+color:#0d6efd;
+cursor:pointer;
+transition:.3s;
+}
+
+.info-icon:hover{
+transform:scale(1.3);
+color:#084298;
+}
 
 </style>
 </head>
@@ -156,7 +172,7 @@ animation:float 3s ease-in-out infinite;
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
 <div class="container">
-<a class="navbar-brand fw-bold" href="#">Prasad</a>
+<a class="navbar-brand fw-bold" href="#">Prasad Bhalerao</a>
 
 <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navMenu">
 <span class="navbar-toggler-icon"></span>
@@ -244,29 +260,42 @@ designing scalable web applications, API integrations and database optimization.
 
 <div class="row g-4">
 
+<!-- PROJECT 1 -->
 <div class="col-md-4">
-<div class="card project-card h-100">
+<div class="card project-card h-100 position-relative">
 <div class="card-body">
 <h5>MBYT – Banking Product</h5>
-<p>Bulk PDF generation, approval workflow, notifications.</p>
+<p>Bulk statement generation system</p>
+
+<!-- Info Icon -->
+<i class="fas fa-circle-info info-icon"
+onclick="openProject('mbyt')"></i>
 </div>
 </div>
 </div>
 
+<!-- PROJECT 2 -->
 <div class="col-md-4">
-<div class="card project-card h-100">
+<div class="card project-card h-100 position-relative">
 <div class="card-body">
-<h5>College ERP</h5>
-<p>Staff, finance & certificate modules.</p>
+<h5>College ERP (WIP)</h5>
+<p>Education management system</p>
+
+<i class="fas fa-circle-info info-icon"
+onclick="openProject('erp')"></i>
 </div>
 </div>
 </div>
 
+<!-- PROJECT 3 -->
 <div class="col-md-4">
-<div class="card project-card h-100">
+<div class="card project-card h-100 position-relative">
 <div class="card-body">
 <h5>My LokNeta</h5>
-<p>Citizen grievance platform.</p>
+<p>Citizen grievance platform</p>
+
+<i class="fas fa-circle-info info-icon"
+onclick="openProject('lokneta')"></i>
 </div>
 </div>
 </div>
@@ -274,6 +303,23 @@ designing scalable web applications, API integrations and database optimization.
 </div>
 </div>
 </section>
+
+<!-- PROJECT MODAL -->
+<div class="modal fade" id="projectModal" tabindex="-1">
+<div class="modal-dialog modal-lg modal-dialog-centered">
+<div class="modal-content">
+
+<div class="modal-header">
+<h5 class="modal-title" id="modalTitle"></h5>
+<button class="btn-close" data-bs-dismiss="modal"></button>
+</div>
+
+<div class="modal-body" id="modalBody"></div>
+
+</div>
+</div>
+</div>
+
 
 <!-- SKILLS -->
 <section id="skills" class="py-5 bg-light">
@@ -349,8 +395,93 @@ entry.target.style.transform='translateY(0)';
 });
 },{threshold:0.3});
 skills.forEach(s=>observer.observe(s));
+
+const projectData = {
+
+mbyt: {
+title:"MBYT – Mokshasoftlabs, Mumbai",
+body:`
+<b>Environment:</b><br>
+ASP.NET Core MVC, C# 9.0, EF Core, JS (Drag & Drop), jQuery, 
+HTML5, CSS3, Bootstrap 5, Syncfusion PDF, SQL Server<br><br>
+
+<b>Description:</b>
+<ul>
+<li>Bulk statement PDF generation system</li>
+<li>Custom drag & drop template editor</li>
+<li>Dynamic PDF generation (Syncfusion)</li>
+<li>Maker-checker approvals</li>
+<li>Email & SMS notifications</li>
+<li>High-volume performance optimization</li>
+</ul>
+
+<b>Responsibilities:</b>
+<ul>
+<li>End-to-end development</li>
+<li>Design, deployment & testing</li>
+<li>Database optimization</li>
+</ul>
+`
+},
+
+erp:{
+title:"College ERP – Vishwa Technologies (WIP)",
+body:`
+<b>Environment:</b><br>
+ASP.NET MVC, C# 9.0, EF 6.3, jQuery, Ajax, Bootstrap 5, SQL Server<br><br>
+
+<b>Characterization:</b>
+<ul>
+<li>Department & staff management</li>
+<li>Finance module</li>
+<li>Bonafide, TC, Leaving certificate generation</li>
+</ul>
+
+<b>Responsibilities:</b>
+<ul>
+<li>Database modification</li>
+<li>Server-side development</li>
+<li>Deployment</li>
+</ul>
+`
+},
+
+lokneta:{
+title:"My LokNeta – Vishwa Technologies",
+body:`
+<b>Environment:</b><br>
+ASP.NET MVC, C# 9.0, EF 6.3, jQuery, Ajax, Bootstrap 5, SQL Server<br><br>
+
+<b>Characterization:</b>
+<ul>
+<li>Citizen grievance portal</li>
+<li>Politician profile management</li>
+<li>Ward-based complaint tracking</li>
+</ul>
+
+<b>Key Features:</b>
+<ul>
+<li>Secure authentication</li>
+<li>Role-based authorization</li>
+<li>Responsive UI</li>
+</ul>
+
+<b>Responsibilities:</b>
+<ul>
+<li>DB design</li>
+<li>API & server development</li>
+<li>Deployment</li>
+</ul>
+`
+}
+};
+
+function openProject(key){
+document.getElementById("modalTitle").innerHTML = projectData[key].title;
+document.getElementById("modalBody").innerHTML = projectData[key].body;
+new bootstrap.Modal(document.getElementById("projectModal")).show();
+}
 </script>
 
 </body>
 </html>
-
